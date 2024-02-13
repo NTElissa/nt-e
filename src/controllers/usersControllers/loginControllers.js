@@ -37,4 +37,30 @@ const loginController = async (req, res) => {
   }
 };
 
-export { loginController };
+const getAllUsers = async (req, res) => { 
+  try {
+    const users = await User.find();
+  
+    if (users.length === 0) {
+      return res.status(404).json({ message: 'No users found' }); 
+    }
+
+    return res.json(users); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+const getUserByEmail = async (email) => {
+  try {
+    const user = await User.findOne({ email });
+    return user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export { loginController, getAllUsers, getUserByEmail };
