@@ -3,7 +3,14 @@ import mongoose from "mongoose";
 import app from "./app.js";
 
 mongoose.set('strictQuery', false);
+
 dotenv.config();
+
+// configuring dotenv
+dotenv.config();
+
+// define some my env variables
+
 const port = process.env.PORT;
 const host = process.env.HOST;
 const startServer = () => app.listen(port);
