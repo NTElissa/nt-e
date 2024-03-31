@@ -52,6 +52,22 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
 
 const getUserByEmail = async (email) => {
   try {
@@ -63,4 +79,4 @@ const getUserByEmail = async (email) => {
   }
 };
 
-export { loginController, getAllUsers, getUserByEmail };
+export { loginController, getAllUsers, getUserByEmail, getUserById };
